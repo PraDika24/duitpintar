@@ -5,6 +5,7 @@ import { useChatSessions } from '@/hooks/useChatSessions'
 import ChatMessages, { Message } from '@/components/ChatMessages'
 import ChatInput from '@/components/ChatInput'
 import Sidebar from '@/components/Sidebar'
+import { trackEvent } from '@/lib/analytics'
 
 // Batasi history yang dikirim ke API agar tidak membengkak
 const MAX_CONTEXT_MESSAGES = 20
@@ -25,10 +26,17 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSend = useCallback(
-    async (text: string) => {
+    
+    async (text: string, isChip = false) => {
+      
       let sessionId = activeId
-      if (!sessionId) sessionId = createSession()
+      
+      if (!sessionId) {
+        sessionId = createSession()
+        trackEvent.newChat()
+      }
 
+      trackEvent.messageSent(isChip) 
       const userMsg: Message = { role: 'user', content: text }
 
       // Tambah pesan user ke session

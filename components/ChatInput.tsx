@@ -8,7 +8,7 @@ import { useRateLimit } from '@/hooks/useRateLimit'
 import { LIMITS } from '@/lib/validation'
 
 interface ChatInputProps {
-  onSend: (message: string) => void
+   onSend: (message: string, isChip?: boolean) => void
   isLoading: boolean
 }
 
@@ -56,7 +56,7 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
                 key={chip}
                 onClick={() => {
                   if (!checkLimit()) return
-                  onSend(chip)
+                  onSend(chip, true)
                 }}
                 disabled={isLoading}
                 className="text-xs px-3 py-1.5 rounded-full border border-border hover:border-emerald-500 hover:text-emerald-600 text-muted-foreground transition-colors disabled:opacity-50"
