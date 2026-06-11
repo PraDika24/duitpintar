@@ -9,11 +9,6 @@ const withPWA = require('next-pwa')({
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    turbo: {
-      root: __dirname,
-    },
-  },
-};
+}
 
-module.exports = withPWA(nextConfig)
+export default nextConfig;

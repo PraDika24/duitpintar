@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { Analytics } from '@vercel/analytics/react'
 import { PWAInstallBanner } from '@/components/PWAInstallBanner'
 import './globals.css'
+import type { Viewport } from "next";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,8 +20,12 @@ export const metadata: Metadata = {
   icons: {
     apple: '/icons/icon-192.png',
   },
-  themeColor: '#059669',
+  
 }
+
+export const viewport: Viewport = {
+  themeColor: '#059669',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
